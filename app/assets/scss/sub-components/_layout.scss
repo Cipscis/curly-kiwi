@@ -1,0 +1,14 @@
+@use "../theme/spacing";
+
+.layout {
+	display: grid;
+	justify-items: center;
+	align-content: center;
+	gap: spacing.$lg;
+
+	min-height: 100dvh;
+	max-width: 130ch;
+	margin-inline: auto;
+	padding-inline: spacing.$md;
+	padding-block: spacing.$xl;
+}

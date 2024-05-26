@@ -1,1 +1,22 @@
-// TODO: Styles go here
+@use "sass:meta";
+
+@layer reset, theme, components;
+
+@layer reset {
+	@include meta.load-css("reset");
+}
+
+@layer theme {
+	@include meta.load-css("theme/base");
+}
+
+@layer sub-components {
+	@include meta.load-css("sub-components/cass-bite");
+	@include meta.load-css("sub-components/content");
+	@include meta.load-css("sub-components/layout");
+}
+
+@layer components {
+	@include meta.load-css("components/contact");
+	@include meta.load-css("components/projects");
+}
