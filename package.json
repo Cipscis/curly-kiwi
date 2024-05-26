@@ -1,7 +1,7 @@
 {
-	"name": "@cipscis/base-project",
-	"version": "0.1.0",
-	"description": "This is my base project to use when creating new projects.",
+	"name": "@cipscis/curly-kiwi",
+	"version": "1.0.0",
+	"description": "This small website displays information about me and my projects.",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -28,7 +28,7 @@
 	"author": "Brooke Hart",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cipscis/base-project.git"
+		"url": "https://github.com/cipscis/curly-kiwi.git"
 	},
 	"license": "Hippocratic-2.1",
 	"devDependencies": {

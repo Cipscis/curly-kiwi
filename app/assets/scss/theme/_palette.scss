@@ -1,0 +1,279 @@
+@use "../tools" as *;
+
+////////////////////
+// Colour palette //
+////////////////////
+
+$white: oklch(1 0 0);
+$black: oklch(0 0 0);
+
+$grey--lightest: oklch(0.98 0 0);
+$grey--lighter: oklch(0.9 0 0);
+$grey--light: oklch(0.8 0 0);
+$grey--lightish: oklch(0.75 0 0);
+
+$grey--darkest: oklch(0.15 0 0);
+$grey--darker: oklch(0.3 0 0);
+$grey--dark: oklch(0.35 0 0);
+$grey--darkish: oklch(0.4 0 0);
+
+$orange--light: oklch(0.55 0.13 70);
+$orange--dark: oklch(0.7 0.15 70);
+
+$blue--light: oklch(0.27 0.3 225);
+$blue--dark: oklch(0.8 0.1 225);
+
+$green--light: oklch(0.27 0.3 150);
+$green--dark: oklch(0.8 0.1 150);
+
+$red--light: oklch(0.27 0.3 25);
+$red--dark: oklch(0.8 0.1 25);
+
+////////////////
+// Light mode //
+////////////////
+
+// Supplementary colours
+////////////////////////
+$link-base--light: $orange--light;
+$accent-base--light: $orange--light;
+
+// Contrast pairs
+/////////////////
+$bg-primary--light: $grey--lightest;
+$colour-primary--light: $black;
+
+$bg-primary--active--light: $grey--lighter;
+$colour-primary--active--light: $black;
+
+$bg-secondary--light: $grey--lighter;
+$colour-secondary--light: $black;
+
+$bg-secondary--active--light: $grey--light;
+$colour-secondary--active--light: $black;
+
+$bg-tertiary--light: $grey--light;
+$colour-tertiary--light: $black;
+
+$bg-tertiary--active--light: $grey--lightish;
+$colour-tertiary--active--light: $black;
+
+
+/// The colours to use in the light colour scheme
+@mixin light {
+	color-scheme: light;
+	--theme: light;
+
+	--link-base: #{$link-base--light};
+	--link: var(--link-base);
+
+	--accent-base: #{$accent-base--light};
+	--accent: var(--accent-base);
+
+	--bg-primary: #{$bg-primary--light};
+	--colour-primary: #{$colour-primary--light};
+
+	--bg-primary--active: #{$bg-primary--active--light};
+	--colour-primary--active: #{$colour-primary--active--light};
+
+	--bg-secondary: #{$bg-secondary--light};
+	--colour-secondary: #{$colour-secondary--light};
+
+	--bg-secondary--active: #{$bg-secondary--active--light};
+	--colour-secondary--active: #{$colour-secondary--active--light};
+
+	--bg-tertiary: #{$bg-tertiary--light};
+	--colour-tertiary: #{$colour-tertiary--light};
+
+	--bg-tertiary--active: #{$bg-tertiary--active--light};
+	--colour-tertiary--active: #{$colour-tertiary--active--light};
+
+	// Task statuses
+	--colour-task--todo: #{$blue--light};
+	--colour-task--in-progress: #{$blue--light};
+	--colour-task--completed: #{$green--light};
+
+	--colour-task--investigating: #{$blue--light};
+	--colour-task--in-review: #{$blue--light};
+	--colour-task--ready-to-test: #{$green--light};
+	--colour-task--paused: #{$red--light};
+	--colour-task--approved-to-deploy: #{$green--light};
+	--colour-task--will-not-do: #{$red--light};
+}
+
+///////////////
+// Dark mode //
+///////////////
+
+// Supplementary colours
+////////////////////////
+$link-base--dark: $orange--dark;
+$accent-base--dark: $orange--dark;
+
+// Contrast pairs
+/////////////////
+$bg-primary--dark: $grey--darkest;
+$colour-primary--dark: $white;
+
+$bg-primary--active--dark: $grey--darker;
+$colour-primary--active--dark: $white;
+
+$bg-secondary--dark: $grey--darker;
+$colour-secondary--dark: $white;
+
+$bg-secondary--active--dark: $grey--dark;
+$colour-secondary--active--dark: $white;
+
+$bg-tertiary--dark: $grey--dark;
+$colour-tertiary--dark: $white;
+
+$bg-tertiary--active--dark: $grey--darkish;
+$colour-tertiary--active--dark: $white;
+
+/// The colours to use in the dark colour scheme
+@mixin dark {
+	color-scheme: dark;
+	--theme: dark;
+
+	--link-base: #{$link-base--dark};
+	--link: var(--link-base);
+
+	--accent-base: #{$accent-base--dark};
+	--accent: var(--accent-base);
+
+	--bg-primary: #{$bg-primary--dark};
+	--colour-primary: #{$colour-primary--dark};
+
+	--bg-primary--active: #{$bg-primary--active--dark};
+	--colour-primary--active: #{$colour-primary--active--dark};
+
+	--bg-secondary: #{$bg-secondary--dark};
+	--colour-secondary: #{$colour-secondary--dark};
+
+	--bg-secondary--active: #{$bg-secondary--active--dark};
+	--colour-secondary--active: #{$colour-secondary--active--dark};
+
+	--bg-tertiary: #{$bg-tertiary--dark};
+	--colour-tertiary: #{$colour-tertiary--dark};
+
+	--bg-tertiary--active: #{$bg-tertiary--active--dark};
+	--colour-tertiary--active: #{$colour-tertiary--active--dark};
+
+	// Task statuses
+	--colour-task--todo: #{$blue--dark};
+	--colour-task--in-progress: #{$blue--dark};
+	--colour-task--completed: #{$green--dark};
+
+	--colour-task--investigating: #{$blue--dark};
+	--colour-task--in-review: #{$blue--dark};
+	--colour-task--ready-to-test: #{$green--dark};
+	--colour-task--paused: #{$red--dark};
+	--colour-task--approved-to-deploy: #{$green--dark};
+	--colour-task--will-not-do: #{$red--dark};
+}
+
+////////////////////
+// Palette Mixins //
+////////////////////
+
+/// Standard link styling
+@mixin link {
+	@include use-var(color, --link, $link-base--light);
+
+	text-decoration: underline;
+}
+
+// These "contrast" mixins can be used to apply pairs of background and text colours that have sufficient contrast.
+
+/// The main background/colour pair.
+/// @param {boolean} $active [false] - Whether or not the "active" contrast pair should be used on hover and focus.
+@mixin primary($active: false) {
+	--bg: var(--bg-primary);
+	--colour: var(--colour-primary);
+
+	--accent: var(--accent-base, #{$accent-base--light});
+	--link: var(--link-base, #{$link-base--light});
+
+	@include use-var(background-color, --bg, $bg-primary--light);
+	@include use-var(color, --colour, $colour-primary--light);
+
+	@if ($active == true) {
+		@include active {
+			@include primary--active;
+		}
+	}
+}
+
+/// An "active" variant of the main background/colour pair.
+@mixin primary--active {
+	--bg: var(--bg-primary--active);
+	--colour: var(--colour-primary--active);
+
+	--accent: var(--accent-base, #{$accent-base--light});
+	--link: var(--link-base, #{$link-base--light});
+
+	@include use-var(background-color, --bg, $bg-primary--active--light);
+	@include use-var(color, --colour, $colour-primary--active--light);
+}
+
+/// A secondary background-colour pair to contrast with a primary contrast area.
+/// @param {boolean} $active [false] - Whether or not the "active" contrast pair should be used on hover and focus.
+@mixin secondary($active: false) {
+	--bg: var(--bg-secondary);
+	--colour: var(--colour-secondary);
+
+	--accent: var(--accent-base, #{$accent-base--light});
+	--link: var(--link-base, #{$link-base--light});
+
+	@include use-var(background-color, --bg, $bg-secondary--light);
+	@include use-var(color, --colour, $colour-secondary--light);
+
+	@if ($active == true) {
+		@include active {
+			@include secondary--active;
+		}
+	}
+}
+
+/// An "active" variant of the secondary background/colour pair.
+@mixin secondary--active {
+	--bg: var(--bg-secondary--active);
+	--colour: var(--colour-secondary--active);
+
+	--accent: var(--accent-base, #{$accent-base--light});
+	--link: var(--link-base, #{$link-base--light});
+
+	@include use-var(background-color, --bg, $bg-secondary--active--light);
+	@include use-var(color, --colour, $colour-secondary--active--light);
+}
+
+/// A tertiary background-colour pair to contrast with a primary contrast area.
+/// @param {boolean} $active [false] - Whether or not the "active" contrast pair should be used on hover and focus.
+@mixin tertiary($active: false) {
+	--bg: var(--bg-tertiary);
+	--colour: var(--colour-tertiary);
+
+	--accent: var(--accent-base, #{$accent-base--light});
+	--link: var(--link-base, #{$link-base--light});
+
+	@include use-var(background-color, --bg, $bg-tertiary--light);
+	@include use-var(color, --colour, $colour-tertiary--light);
+
+	@if ($active == true) {
+		@include active {
+			@include tertiary--active;
+		}
+	}
+}
+
+/// An "active" variant of the tertiary background/colour pair.
+@mixin tertiary--active {
+	--bg: var(--bg-tertiary--active);
+	--colour: var(--colour-tertiary--active);
+
+	--accent: var(--accent-base, #{$accent-base--light});
+	--link: var(--link-base, #{$link-base--light});
+
+	@include use-var(background-color, --bg, $bg-tertiary--active--light);
+	@include use-var(color, --colour, $colour-tertiary--active--light);
+}

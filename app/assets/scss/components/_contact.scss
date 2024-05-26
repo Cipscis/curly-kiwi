@@ -1,0 +1,52 @@
+@use "../theme/palette";
+@use "../theme/radius";
+@use "../theme/spacing";
+@use "../theme/typography";
+
+@mixin peekaboo {
+	content: "";
+	display: block;
+	aspect-ratio: 1;
+
+	position: absolute;
+
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.contact {
+	@include palette.secondary;
+	@include typography.base-body;
+
+	padding: spacing.$lg;
+	border-radius: radius.$lg;
+
+	position: relative;
+	&::before {
+		@include peekaboo;
+		width: 3em;
+
+		bottom: 100%;
+		left: 10%;
+		translate: 0 29%;
+
+		background-image: url("/assets/images/milo-relaxed.png");
+	}
+}
+
+.contact__name {
+	@include typography.heading-1;
+}
+
+.contact__pronouns {
+	@include typography.base-small;
+
+	margin-bottom: spacing.$lg;
+}
+
+.contact__description {}
+
+.contact__email {
+	display: inline-block;
+	margin-top: spacing.$lg;
+}

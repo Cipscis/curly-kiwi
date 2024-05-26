@@ -1,0 +1,9 @@
+/// A useful grid-based layout with automatically allocated
+/// rows that have a specified minimum width.
+/// @param {length} $min-width - The minimum column width before columns should wrap to an extra row
+/// @param {length} $max-width [1fr] - The maximum column width before columns should wrap to an extra row
+/// @param {'auto-fill' | 'auto-fit'} $strategy [auto-fit] - The column filling algorithm to use
+@mixin grid-ram($min-width, $max-width: 1fr, $strategy: auto-fit) {
+	display: grid;
+	grid-template-columns: repeat($strategy, minmax($min-width, $max-width));
+}
