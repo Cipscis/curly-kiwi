@@ -1,0 +1,52 @@
+:root,
+::backdrop {
+	@media (prefers-color-scheme: light) {
+		--bg-primary: #eeeeee;
+		--colour-primary: #333333;
+		--colour-primary--low: #777777;
+
+		--bg-secondary: #dddddd;
+		--colour-secondary: #333333;
+
+		--colour-link: #4444dd;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		--bg-primary: #111111;
+		--colour-primary: #ffffff;
+		--colour-primary--low: #888888;
+
+		--bg-secondary: #333333;
+		--colour-secondary: #ffffff;
+
+		--colour-link: #9999ff;
+	}
+}
+
+@mixin contrast-primary {
+	background: var(--bg-primary);
+	color: var(--colour-primary);
+}
+
+@mixin contrast-primary--low {
+	background: var(--bg-primary);
+	color: var(--colour-primary--low);
+}
+
+@mixin contrast-secondary {
+	background: var(--bg-secondary);
+	color: var(--colour-secondary);
+}
+
+html {
+	@media (prefers-color-scheme: light) {
+		color-scheme: light;
+	}
+	@media (prefers-color-scheme: dark) {
+		color-scheme: dark;
+	}
+
+	& {
+		@include contrast-primary;
+	}
+}

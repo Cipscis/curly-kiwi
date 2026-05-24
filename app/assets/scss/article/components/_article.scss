@@ -1,0 +1,149 @@
+@use "../theme/colours";
+@use "../theme/fonts";
+
+article {
+	gap: 2rem;
+	padding-block: 5rem;
+
+	> * {
+		margin: 0;
+	}
+
+	& {
+		h1 {
+			@include fonts.heading-1;
+			grid-column: bleed-right;
+		}
+
+		h2 {
+			@include fonts.heading-2;
+			grid-column: bleed-right;
+			margin-top: 2rem;
+		}
+
+		h3 {
+			@include fonts.heading-3;
+			margin-top: 2rem;
+		}
+
+		h4 {
+			@include fonts.heading-4;
+			margin-top: 2rem;
+		}
+
+		p,
+		blockquote,
+		ul,
+		ol,
+		table,
+		figcaption {
+			@include fonts.base;
+		}
+
+		a {
+			color: var(--colour-link);
+
+			@supports (background-clip: text) {
+				background: linear-gradient(
+					270deg,
+					var(--colour-primary),
+					var(--colour-primary) 33%,
+					var(--colour-link) 67%,
+					var(--colour-link)
+				);
+				background-size: 300% 100%;
+				background-position: 100% 0;
+				background-clip: text;
+				color: transparent;
+
+				text-decoration-thickness: 2px;
+				text-decoration-color: var(--colour-link);
+
+				@media (prefers-reduced-motion: no-preference) {
+					transition: background-position 0.4s ease-in-out;
+				}
+				&:hover,
+				&:focus {
+					background-position: 0 0;
+				}
+			}
+
+			@media print {
+				background-clip: initial;
+				color: currentColor;
+				background: transparent;
+			}
+		}
+
+		code {
+			@include fonts.code;
+		}
+
+		p code:not(a code) {
+			display: inline-block;
+			@include colours.contrast-secondary;
+			padding-inline: 0.5ch;
+			border-radius: 0.5ch;
+
+			word-break: break-word;
+		}
+
+		pre {
+			overflow: auto;
+			code {
+				display: block;
+				max-width: max-content;
+				overflow: auto;
+				padding: 1ch;
+				border-radius: 1ch;
+				tab-size: 4;
+				@include colours.contrast-secondary;
+			}
+		}
+
+		blockquote {
+			margin-inline: 0;
+			padding-left: 5ch;
+			position: relative;
+			&::before {
+				content: "";
+				position: absolute;
+				inset-block: 0;
+				left: 0;
+
+				width: 0.5ch;
+				@include colours.contrast-secondary;
+			}
+
+			& {
+				> :first-child {
+					margin-top: 0;
+				}
+			}
+		}
+
+		figure {
+			padding: 1em;
+			border-radius: 1em;
+			@include colours.contrast-secondary;
+		}
+
+		table {
+			border-collapse: collapse;
+			th, td {
+				text-align: left;
+				vertical-align: top;
+				padding: 0.5ex 1ch;
+			}
+			tbody {
+				tr:nth-child(odd) {
+					background: var(--bg-secondary);
+				}
+			}
+		}
+	}
+}
+
+.article__meta {
+	@include fonts.meta;
+}

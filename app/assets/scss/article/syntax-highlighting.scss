@@ -1,0 +1,17 @@
+@use "sass:meta";
+
+// This file is only loaded if syntax highlighting code has been run on this page
+
+@layer packages {
+	body {
+		@media (prefers-color-scheme: light) {
+			@include meta.load-css("../../../node_modules/highlight.js/scss/a11y-light.scss");
+		}
+	}
+
+	body {
+		@media (prefers-color-scheme: dark) {
+			@include meta.load-css("../../../node_modules/highlight.js/scss/a11y-dark.scss");
+		}
+	}
+}

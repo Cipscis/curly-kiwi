@@ -1,0 +1,20 @@
+.header-link {
+	position: absolute;
+	// With background-clip: text, the colour disappears in Firefox when translating past 100%
+	transform: translateX(-99.9%);
+
+	background: var(--colour-link);
+	background-clip: text;
+	color: transparent;
+
+	text-decoration: none;
+	// Necessary to align it with the title
+	line-height: 1lh;
+
+	opacity: 0.75;
+	transition: opacity 0.3s ease-in-out;
+	&:hover,
+	&:focus {
+		opacity: 1;
+	}
+}

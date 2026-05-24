@@ -1,0 +1,15 @@
+.layout {
+	display: grid;
+	grid-template-columns:
+		[full-start bleed-left-start] 1rem
+		1fr
+		[main-start bleed-right-start]
+		minmax(auto, 80ch)
+		[main-end bleed-left-end]
+		1fr
+		1rem [full-end bleed-right-end];
+
+	> * {
+		grid-column: main;
+	}
+}
