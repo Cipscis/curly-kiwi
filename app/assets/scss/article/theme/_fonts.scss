@@ -147,7 +147,7 @@ $font-family-monospace: $font-face-monospace, monospace;
 html {
 	font-family: $font-family-base;
 
-	font-size: 12px;
+	font-size: 14px;
 	@media (768px <= width) {
 		font-size: 16px;
 	}

@@ -2,8 +2,13 @@
 @use "../theme/fonts";
 
 article {
-	gap: 2rem;
-	padding-block: 5rem;
+	row-gap: 2rem;
+	padding-block: min(5rem, 5vw);
+
+	--inset-padding: 2ch;
+	@media (768px <= width) {
+		--inset-padding: 5ch;
+	}
 
 	> * {
 		margin: 0;
@@ -103,7 +108,7 @@ article {
 
 		blockquote {
 			margin-inline: 0;
-			padding-left: 5ch;
+			padding-left: var(--inset-padding);
 			position: relative;
 			&::before {
 				content: "";
@@ -119,6 +124,9 @@ article {
 				> :first-child {
 					margin-top: 0;
 				}
+				> :last-child {
+					margin-bottom: 0;
+				}
 			}
 		}
 
@@ -126,6 +134,11 @@ article {
 			padding: 1em;
 			border-radius: 1em;
 			@include colours.contrast-secondary;
+		}
+
+		ul,
+		ol {
+			padding-inline-start: var(--inset-padding);
 		}
 
 		table {
