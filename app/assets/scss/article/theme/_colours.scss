@@ -9,6 +9,10 @@
 		--colour-secondary: #333333;
 
 		--colour-link: #4444dd;
+
+		@media print {
+			--bg-primary: transparent;
+		}
 	}
 
 	@media (prefers-color-scheme: dark) {

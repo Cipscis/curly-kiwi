@@ -1,7 +1,7 @@
 .layout {
 	display: grid;
 	grid-template-columns:
-		1ch
+		4ch
 		[full-start bleed-left-start] calc(2rem - 1ch)
 		1fr
 		[main-start bleed-right-start]
@@ -9,7 +9,7 @@
 		[main-end bleed-left-end]
 		1fr
 		calc(2rem - 1ch) [full-end bleed-right-end]
-		1ch;
+		4ch;
 
 	> * {
 		grid-column: main;

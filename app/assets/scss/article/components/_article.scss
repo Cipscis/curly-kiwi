@@ -3,7 +3,9 @@
 
 article {
 	row-gap: 2rem;
-	padding-block: min(5rem, 5vw);
+	@media screen {
+		padding-block: min(5rem, 5vw);
+	}
 
 	--inset-padding: 2ch;
 	@media (768px <= width) {
@@ -15,6 +17,15 @@ article {
 	}
 
 	& {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			break-after: avoid;
+		}
+
 		h1 {
 			@include fonts.heading-1;
 			grid-column: bleed-right;
@@ -23,17 +34,23 @@ article {
 		h2 {
 			@include fonts.heading-2;
 			grid-column: bleed-right;
-			margin-top: 2rem;
+			@media screen {
+				margin-top: 2rem;
+			}
 		}
 
 		h3 {
 			@include fonts.heading-3;
-			margin-top: 2rem;
+			@media screen {
+				margin-top: 1rem;
+			}
 		}
 
 		h4 {
 			@include fonts.heading-4;
-			margin-top: 2rem;
+			@media screen {
+				margin-top: 0.5rem;
+			}
 		}
 
 		p,
@@ -43,6 +60,7 @@ article {
 		table,
 		figcaption {
 			@include fonts.base;
+			break-inside: avoid;
 		}
 
 		a {
@@ -111,13 +129,22 @@ article {
 			padding-left: var(--inset-padding);
 			position: relative;
 			&::before {
-				content: "";
 				position: absolute;
-				inset-block: 0;
 				left: 0;
 
-				width: 0.5ch;
-				@include colours.contrast-secondary;
+				@media screen {
+					content: "";
+
+				inset-block: 0;
+					width: 0.5ch;
+					@include colours.contrast-secondary;
+				}
+
+				@media print {
+					content: "“";
+					font-size: 6rem;
+					top: -0.3em;
+				}
 			}
 
 			& {
@@ -128,6 +155,10 @@ article {
 					margin-bottom: 0;
 				}
 			}
+		}
+
+		> p:has(+ blockquote) {
+			break-after: avoid;
 		}
 
 		figure {
@@ -157,6 +188,28 @@ article {
 	}
 }
 
+.article--submission {
+	counter-reset: --paragraph-counter;
+	> p:not(.article__meta) {
+		position: relative;
+		&::before {
+			counter-increment: --paragraph-counter;
+			content: counter(--paragraph-counter);
+
+			position: absolute;
+			top: 0;
+			right: 100%;
+			margin-right: 2ch;
+
+			@include colours.contrast-primary--low;
+		}
+	}
+}
+
 .article__meta {
 	@include fonts.meta;
+}
+
+.article__break {
+	break-before: page;
 }
