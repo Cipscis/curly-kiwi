@@ -49,7 +49,7 @@ export class BankAccountNumber extends HTMLElement {
 			try {
 				error.textContent = '';
 
-				const decryptionKeySource = (window.prompt('what is my name?') ?? '').toLowerCase();
+				const decryptionKeySource = (window.prompt('What is my name?') ?? '').toLowerCase();
 				const decryptedMessage = await decrypt(encryptedMessage, decryptionKeySource);
 				display.textContent = decryptedMessage;
 
