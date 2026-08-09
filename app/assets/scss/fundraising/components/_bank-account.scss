@@ -69,4 +69,6 @@ bank-account-number {
 
 .bank-account__error {
 	grid-area: error;
+	@include fonts.base;
+	color: var(--colour-error);
 }
