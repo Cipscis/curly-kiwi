@@ -1,0 +1,34 @@
+@use "../theme/fonts";
+
+bank-account-number {
+	display: grid;
+	grid-template-columns: min-content min-content;
+	grid-template-areas:
+		"label label"
+		"display button"
+		"error error";
+	column-gap: 1em;
+	align-items: center;
+}
+
+.bank-account__label {
+	@include fonts.heading-3;
+
+	grid-area: label;
+}
+
+.bank-account__display {
+	@include fonts.code;
+
+	grid-area: display;
+}
+
+.bank-account__reveal, .bank-account__copy {
+	@include fonts.base;
+
+	grid-area: button;
+}
+
+.bank-account__error {
+	grid-area: error;
+}
