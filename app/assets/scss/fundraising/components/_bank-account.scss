@@ -1,6 +1,11 @@
 @use "../theme/fonts";
+@use "../theme/colours";
 
 bank-account-number {
+	&:empty {
+		display: none;
+	}
+
 	display: grid;
 	grid-template-columns: min-content min-content;
 	grid-template-areas:
@@ -24,9 +29,42 @@ bank-account-number {
 }
 
 .bank-account__reveal, .bank-account__copy {
-	@include fonts.base;
+	& {
+		all: unset;
 
-	grid-area: button;
+		box-sizing: border-box;
+		cursor: pointer;
+		&:focus-visible {
+			outline: auto;
+		}
+
+		@include fonts.base;
+
+		padding: 0 0.5ch;
+		border-radius: 0.2em;
+		text-align: center;
+
+		border: 1px solid currentColor;
+
+		background: linear-gradient(
+			270deg,
+			var(--bg-primary),
+			var(--bg-primary) 33%,
+			var(--bg-secondary) 67%,
+			var(--bg-secondary) 100%,
+		);
+		background-size: 300% 100%;
+		background-position: 100% 0;
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition: background-position 200ms ease-in-out;
+		}
+		&:hover, &:focus-visible {
+			background-position: 0 0;
+		}
+
+		grid-area: button;
+	}
 }
 
 .bank-account__error {

@@ -1,0 +1,61 @@
+@use "../theme/colours";
+@use "../theme/fonts";
+
+main {
+	row-gap: 2rem;
+	@media screen {
+		padding-block: min(5rem, 5vw);
+	}
+
+	> * {
+		margin: 0;
+	}
+
+	& {
+		h1 {
+			break-after: avoid;
+			@include fonts.heading-1;
+			grid-column: bleed-right;
+		}
+
+		p {
+			@include fonts.base;
+			break-inside: avoid;
+		}
+
+		a {
+			color: var(--colour-link);
+
+			@supports (background-clip: text) {
+				background: linear-gradient(
+					270deg,
+					var(--colour-primary),
+					var(--colour-primary) 33%,
+					var(--colour-link) 67%,
+					var(--colour-link)
+				);
+				background-size: 300% 100%;
+				background-position: 100% 0;
+				background-clip: text;
+				color: transparent;
+
+				text-decoration-thickness: 2px;
+				text-decoration-color: var(--colour-link);
+
+				@media (prefers-reduced-motion: no-preference) {
+					transition: background-position 0.4s ease-in-out;
+				}
+				&:hover,
+				&:focus {
+					background-position: 0 0;
+				}
+			}
+
+			@media print {
+				background-clip: initial;
+				color: currentColor;
+				background: transparent;
+			}
+		}
+	}
+}
