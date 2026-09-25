@@ -1,0 +1,18 @@
+@use "../tools" as *;
+
+@use "../theme/spacing";
+
+.poetry {
+	padding: spacing.$xl;
+	margin-inline: auto;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	@include grid-ram(400px);
+	gap: spacing.$xl;
+}
+
+.poetry__poem {
+	display: grid;
+	place-items: center;
+}
