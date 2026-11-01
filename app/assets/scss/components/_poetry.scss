@@ -1,15 +1,12 @@
 @use "../tools" as *;
 
-@use "../theme/spacing";
-
 .poetry {
-	padding: spacing.$xl;
+	--_padding: clamp(2rem, 10vw, 4rem);
+	padding: var(--_padding);
 	margin-inline: auto;
 
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-	@include grid-ram(400px);
-	gap: spacing.$xl;
+	@include grid-ram(min(100vw - 2 * var(--_padding), 400px));
+	gap: var(--_padding);
 }
 
 .poetry__poem {
