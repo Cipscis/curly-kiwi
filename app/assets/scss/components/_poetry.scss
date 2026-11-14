@@ -1,5 +1,11 @@
 @use "../tools" as *;
 
+@property --card-rotate {
+	syntax: "<angle>";
+	inherits: true;
+	initial-value: 0deg;
+}
+
 .poetry {
 	--_padding: clamp(2rem, 10vw, 4rem);
 	padding: var(--_padding);
@@ -7,9 +13,73 @@
 
 	@include grid-ram(min(100vw - 2 * var(--_padding), 400px));
 	gap: var(--_padding);
+
+	overflow: clip;
 }
 
-.poetry__poem {
-	display: grid;
-	place-items: center;
+@scope (.poetry) {
+	.poem {
+		display: grid;
+		place-items: center;
+	}
+
+	.card {
+		display: grid;
+		place-items: center;
+
+		--rotate-offset: 0deg;
+		// Rotate on not quite the Y axis, to make it look more dynamic
+		--rotate-axis: 0.1, 1, 0.1;
+		// Where possible, don't use exactly 180deg for rotation to make it look more dynamic
+		@supports (top: #{"random(0em, 1em)"}) {
+			--rotate-offset: #{"random(-20deg, 0deg)"};
+		}
+		perspective: 50cm;
+		// TODO: Instead of hover, use a button press
+		&:hover {
+			--card-rotate: calc(180deg + var(--rotate-offset));
+		}
+		transition: --card-rotate 0.5s ease-in-out;
+
+		.front,
+		.back {
+			grid-area: 1 / -1;
+			backface-visibility: hidden;
+		}
+		.front {
+			transform:
+				// Flip horizontally
+				rotate3d(var(--rotate-axis), var(--card-rotate))
+				// Scale as thought it's being picked up to be flipped
+				scale(calc((var(--card-rotate) + 180deg) / 180deg))
+			;
+		}
+		.back {
+			transform:
+				// Flip horizontally
+				rotate3d(var(--rotate-axis), calc(var(--card-rotate) - 180deg))
+				// Scale as though it's being picked up to be flipped
+				scale(calc((180deg - var(--card-rotate) + 180deg) / 180deg))
+			;
+
+			display: grid;
+			place-items: center;
+			img, .note {
+				grid-area: 1 / -1;
+			}
+
+			img {
+				// Flip horizontally to make it look like the backface
+				transform: scaleX(-1);
+				// Make it look like you're seeing through paper
+				filter: contrast(0.125) brightness(1.5);
+			}
+		}
+
+		.note {
+			margin: 5rem;
+			position: relative;
+			color: var(--colour-primary);
+		}
+	}
 }
