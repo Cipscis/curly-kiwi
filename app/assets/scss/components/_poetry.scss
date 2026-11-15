@@ -1,3 +1,11 @@
+@font-face {
+	font-family: "caffeine";
+	font-weight: normal;
+	font-style: normal;
+	src: url("/assets/fonts/caffeine/TMT-CaffeineVF.woff2") format("woff2");
+	font-display: auto;
+}
+
 @property --card-rotate {
 	syntax: "<angle>";
 	inherits: true;
@@ -34,12 +42,14 @@
 
 		--transition-speed: 0.5s;
 
+		--note-slant: 5deg;
+		/* Where possible, don't use exactly 180deg for rotation to make it look more dynamic */
 		--rotate-offset: 0deg;
 		/* Rotate on not quite the Y axis, to make it look more dynamic */
 		--rotate-axis: 0.1, 1, 0.1;
-		/* Where possible, don't use exactly 180deg for rotation to make it look more dynamic */
 		// Sass thinks CSS doesn't have a random function
 		@supports (top: #{"random(0em, 1em)"}) {
+			--note-slant: #{"random(-10deg, 10deg)"};
 			--rotate-offset: #{"random(-20deg, 20deg)"};
 			--rotate-axis: #{"random(-0.2, 0.2), 1, random(-0.2, 0.2)"}
 		}
@@ -78,6 +88,8 @@
 			;
 		}
 		.back {
+			width: 100%;
+			container: flippable-card-back / inline-size;
 			transform:
 				/* Flip horizontally */
 				rotate3d(var(--rotate-axis), calc(var(--card-rotate) - 180deg))
@@ -100,9 +112,11 @@
 		}
 
 		.note {
-			margin: 5rem;
-			position: relative;
+			margin: 1rem;
 			color: var(--colour-primary);
+			font-family: "caffeine";
+			font-size: clamp(12px, 7cqi, 2rem);
+			transform: rotateZ(var(--note-slant));
 		}
 	}
 }
