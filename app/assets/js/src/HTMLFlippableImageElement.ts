@@ -32,5 +32,13 @@ export class HTMLFlippableImageElement extends HTMLElement {
 			note.classList.add('light');
 			back.appendChild(note);
 		}
+
+		const button = document.createElement('button');
+		button.classList.add('flip');
+		button.textContent = 'Flip';
+		button.addEventListener('click', () => {
+			card.classList.toggle('flipped');
+		});
+		this.appendChild(button);
 	}
 }
