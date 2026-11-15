@@ -7,6 +7,7 @@ export const config: BuildOptions = {
 	entryPoints: [
 		`${srcPath}/main.ts`,
 		`${srcPath}/fundraising.ts`,
+		`${srcPath}/poetry.ts`,
 	],
 	outdir: dstPath,
 	bundle: true,
