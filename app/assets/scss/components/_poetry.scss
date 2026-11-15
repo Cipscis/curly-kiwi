@@ -32,6 +32,8 @@
 		display: grid;
 		place-items: center;
 
+		--transition-speed: 0.5s;
+
 		--rotate-offset: 0deg;
 		/* Rotate on not quite the Y axis, to make it look more dynamic */
 		--rotate-axis: 0.1, 1, 0.1;
@@ -52,10 +54,15 @@
 
 		perspective: 50cm;
 		/* TODO: Instead of hover, use a button press */
+		position: relative;
+		z-index: 0;
+		--z-index-step: step-end;
+		transition: --card-rotate var(--transition-speed) ease-in-out, z-index var(--transition-speed) var(--z-index-step);
 		&:hover {
 			--card-rotate: calc(180deg + var(--rotate-offset));
+			z-index: 1;
+			--z-index-step: step-start;
 		}
-		transition: --card-rotate 0.5s ease-in-out;
 
 		.front,
 		.back {
@@ -88,7 +95,7 @@
 				/* Flip horizontally to make it look like the backface */
 				transform: scaleX(-1);
 				/* Make it look like you're seeing through paper */
-				filter: contrast(0.125) brightness(1.5);
+				filter: contrast(0.125) brightness(1.75);
 			}
 		}
 
