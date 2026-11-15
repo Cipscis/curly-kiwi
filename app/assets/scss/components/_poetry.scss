@@ -72,7 +72,7 @@
 		z-index: 0;
 		--z-index-step: step-end;
 		transition: --card-rotate var(--transition-speed) ease-in-out, z-index var(--transition-speed) var(--z-index-step);
-		&.flipped {
+		&:where(.flipped, :not(:has(~ .flip)):hover) {
 			--card-rotate: calc(180deg + var(--rotate-offset));
 			z-index: 1;
 			--z-index-step: step-start;
