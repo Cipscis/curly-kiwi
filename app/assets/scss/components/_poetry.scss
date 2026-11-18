@@ -34,6 +34,11 @@
 	.poem {
 		display: grid;
 		place-items: center;
+
+		img {
+			max-width: min(100%, 95vw);
+			max-height: 95lvh;
+		}
 	}
 
 	flippable-image {
@@ -64,7 +69,6 @@
 		/* Front and back faces scale inverse amounts, swapping at 90deg rotation */
 		--scale-front: calc(1 + var(--scale-offset));
 		--scale-back: calc(var(--scale-amount) + 1 - var(--scale-offset));
-
 
 		perspective: 50cm;
 		position: relative;
